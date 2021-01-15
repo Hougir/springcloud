@@ -28,7 +28,7 @@ spring:
 #日志配置
 logback.job.enable: true
 logback.job.cron: 0 50 4 * * ?
-logback.oss.path: wesaas/system/logback
+logback.oss.path: rabbitmq/consumer/logback
 #logging.config: https://wenewrs-oss-data.oss-cn-shanghai-internal.aliyuncs.com/config/logback.xml
 logging.level.ROOT: INFO
 logging.level.org.springframework: WARN
@@ -40,7 +40,7 @@ logging.level.org.springframework.cloud.sleuth: INFO
 logging.level.com.saas.comn.mapper: INFO
 # 日志路径
 logging.file.path: /Users/admin/logs/backup
-logging.file.name: /Users/admin/logs/saas-platform/${spring.application.name}.log
+logging.file.name: /Users/admin/logs/rabbitmq/${spring.application.name}.log
 # 控制台的日志模式
 logging.pattern.console: '%d{yyyy-MM-dd HH:mm:ss} - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %msg%n'
 # 日志记录模式文件

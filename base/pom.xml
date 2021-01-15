@@ -18,6 +18,7 @@
         <module>base-eureka</module>
         <module>base-config</module>
         <module>base-gateway</module>
+        <module>base-admin</module>
     </modules>
 
 </project>

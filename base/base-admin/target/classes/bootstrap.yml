@@ -1,13 +1,13 @@
 #POD名称
 pod.name: ${POD_NAME:${random.int[1,999]}}
 
-#设置服务启动的端口号
+#端口号
 server:
-  port: 18006
+  port: 18004
 
 spring:
   application:
-    name: consumer
+    name: base-admin
   # dev:开发配置、test:测试配置、prod: 发布配置;
   profiles:
     active: ${config.active:dev}
@@ -15,7 +15,7 @@ spring:
     allow-bean-definition-overriding: true
   cloud:
     config:
-      name: common-config,consumer
+      name: common-config,base-admin
       # 通过链接地址访问配置中心
       uri: http://${config.host:127.0.0.1}:${config.port:18002}
       enabled: true
@@ -28,7 +28,7 @@ spring:
 #日志配置
 logback.job.enable: true
 logback.job.cron: 0 50 4 * * ?
-logback.oss.path: rabbitmq/consumer/logback
+logback.oss.path: rabbitmq/base-admin/logback
 #logging.config: https://wenewrs-oss-data.oss-cn-shanghai-internal.aliyuncs.com/config/logback.xml
 logging.level.ROOT: INFO
 logging.level.org.springframework: WARN

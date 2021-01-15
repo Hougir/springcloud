@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    inetutils:
+      preferredNetworks: 10.0
+      ignoredInterfaces: eth0
+  security:
+    user:
+      name: "admin"
+      password: "123456"
+
+info.tags.security: secured
