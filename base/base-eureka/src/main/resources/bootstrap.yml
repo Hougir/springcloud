@@ -1,0 +1,15 @@
+#POD名称
+pod.name: ${POD_NAME:${random.int[1,999]}}
+
+#端口号
+server:
+  port: 18001
+
+spring:
+  application:
+    name: base-eureka
+  # dev:开发配置、test:测试配置、prod: 发布配置;
+  profiles:
+    active: ${config.active:dev}
+  main:
+    allow-bean-definition-overriding: true

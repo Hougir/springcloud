@@ -1,0 +1,89 @@
+# 健康检查相关
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  logfile:
+#    enabled: true
+#  health:
+#    show-details: ALWAYS
+
+spring:
+  cloud:
+    # MQ默认Binder
+    stream:
+      # rabbit 或者 activemq
+      defaultBinder: rabbit
+    bus:
+      trace:
+        enabled: true
+      enabled: true
+  # 设置上传文件大小
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  # 国际化
+#  messages:
+#    basename: i18n/message
+
+ribbon:
+  ConnectTimeout: 20000
+  ReadTimeout: 180000
+feign:
+  sentinel:
+    enabled: true
+
+# Swagger开启
+#swagger.enable: true
+
+# ===========================================================================================
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 3
+    leaseExpirationDurationInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:18001}/eureka
+
+# ====================== 平台网关访问地址 ==========================
+#platform.gateway.host: http://127.0.0.1:18002
+
+#################################  rabbitmq 配置  ##############################################################
+spring.rabbitmq:
+  virtual-host: /
+  host: 192.168.40.88
+  port: 5672
+  username: guest
+  password: guest
+  #消息发送到交换机确认机制,是否确认回调
+  publisherConfirmType: none
+  #消息发送到交换机确认机制,是否返回回馈
+  publisherReturns: false
+  template.mandatory: true
+  listener:
+    concurrency: 5  #最小消息监听线程数
+    max-concurrency: 50 #最大消息监听线程数
+    simple:
+      retry:
+        max-attempts: 3  #最大重试次数
+      enabled: true #是否开启消费者重试（为false时关闭消费者重试，这时消费端代码异常会一直重复收到消息）
+      initial-interval: 5S #重试间隔时间（单位毫秒）
+      default-requeue-rejected: true #重试次数超过上面的设置之后是否丢弃（false不丢弃时需要写相应代码将该消息加入死信队列）
+
+#################################  activemq 配置  ##############################################################
+#spring.activemq:
+#  enable: false
+#  host: failover:(ssl://b-ab8423bc-ec20-4cfd-84bb-5e8a4386bb56-1.mq.ap-south-1.amazonaws.com:61617,ssl://b-ab8423bc-ec20-4cfd-84bb-5e8a4386bb56-2.mq.ap-south-1.amazonaws.com:61617)?maxReconnectAttempts=3&startupMaxReconnectAttempts=3
+#  userName: admin
+#  password: qX6dc7YqWGcTTzw4N
+#  factory:
+#    clientIDPrefix: dev
+#    connectionIDPrefix: dev
+#  pool:
+#    maxConnections: 16
+#
+#exception.dingtalk.url: http://106.14.99.94:93/robot/send?access_token=0858df9972cb919ea3421c48c3a29b953d1051595c75df1f6fc5a32e64533891

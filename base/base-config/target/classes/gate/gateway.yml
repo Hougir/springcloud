@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          lower-case-service-id: true
+      routes:
+        # 系统模块接口
+        - id: product
+          uri: lb://product
+          order: 1
+          predicates:
+            - Path=/api/index/**
+          filters:
+            - StripPrefix=1
+            - CheckAuth=false

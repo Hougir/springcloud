@@ -1,0 +1,70 @@
+# 健康检查相关
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: ALWAYS
+
+#POD名称
+pod.name: ${POD_NAME:${random.int[1,999]}}
+
+#端口号
+server:
+  port: 18002
+
+spring:
+  application:
+    name: base-config
+  #设置为本地方式
+  profiles:
+    active: ${config.active:native}
+
+#  # dev:开发配置、test:测试配置、prod:发布配置;
+#  profiles:
+#    active: ${config.active:dev}
+
+#  #设置为SVN方式
+#  profiles:
+#    active: ${config.active:subversion}
+  cloud:
+    config:
+      server:
+        native:
+          # 配置文件所在目录，classpath（类路径）和（系统文件路径） file两种
+          searchLocations: classpath:/comn/,classpath:/gate/,classpath:/busi/
+
+# ===========================================================================================
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 3
+    leaseExpirationDurationInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: http://${eureka.host:127.0.0.1}:${eureka.port:18001}/eureka
+
+
+#日志配置
+logback.job.enable: true
+logback.job.cron: 0 0 2 * * ?
+logback.oss.path: wesaas/market/logback
+#logging.config: https://wenewrs-oss-data.oss-cn-shanghai-internal.aliyuncs.com/config/logback.xml
+logging.level.ROOT: INFO
+logging.level.org.springframework: WARN
+logging.level.springfox: WARN
+logging.level.com.netflix: WARN
+logging.level.com.saas.market: INFO
+logging.level.org.springframework.cloud.sleuth: INFO
+# 打印SQL
+logging.level.com.saas.market.comn.mapper: INFO
+# 日志路径
+logging.file.path: /Users/admin/logs/backup
+logging.file.name: /Users/admin/logs/saas-market/${spring.application.name}.log
+# 控制台的日志模式
+logging.pattern.console: '%d{yyyy-MM-dd HH:mm:ss} - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %msg%n'
+# 日志记录模式文件
+logging.pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %-5level %logger{36} - %msg%n'

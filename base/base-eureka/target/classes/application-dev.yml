@@ -1,0 +1,44 @@
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#spring:
+#  main:
+#    banner-mode: "console"
+eureka:
+  server:
+    # 关闭自我保护模式（缺省为打开）
+    enable-self-preservation: false
+    # 续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms）
+    eviction-interval-timer-in-ms: 10000
+
+  #实例名,集群中根据这里相互识别
+  instance:
+    # 设置微服务调用地址为IP优先
+    prefer-ip-address: true
+
+  #客户端
+  client:
+    #关闭注册服务(注册自己,以便被其它注册服务发现)
+    register-with-eureka: false
+    #拉取服务列表关闭
+    fetch-registry: false
+    #注册中心地址,如果有多个服务,则需要已”,“ 隔开
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+
+# ===========================================================================================
+#日志配置
+logging.level.ROOT: INFO
+logging.level.org.springframework.web: INFO
+logging.level.com.saas.market: INFO
+# 日志路径
+logging.file.path: /Users/admin/logs/backup
+logging.file.name: /Users/admin/logs/saas-market/${spring.application.name}.log
+# 控制台的日志模式
+logging.pattern.console: '%d{yyyy-MM-dd HH:mm:ss} - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %msg%n'
+# 日志记录模式文件
+logging.pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %-5level %logger{36} - %msg%n'
+
+#info.tags.security: secured

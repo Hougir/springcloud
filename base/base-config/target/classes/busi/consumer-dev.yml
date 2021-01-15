@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    # MQ默认Binder
+    stream:
+      defaultBinder: rabbit
+#################################  rabbitmq 配置  ##############################################################
+spring.cloud.stream.bindings:
+  customize_input:
+    destination: CUSTOMIZE_TOPIC
+    content-type: application/json
+    group: CUSTOMIZE_TOPIC
+    consumer:
+      concurrency: 20

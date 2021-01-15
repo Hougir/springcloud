@@ -1,0 +1,47 @@
+#POD名称
+pod.name: ${POD_NAME:${random.int[1,999]}}
+
+#设置服务启动的端口号
+server:
+  port: 18003
+
+spring:
+  application:
+    name: base-gateway
+  # dev:开发配置、test:测试配置、prod: 发布配置;
+  profiles:
+    active: ${config.active:dev}
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    config:
+      name: common-config,caches-config,gateway
+      # 通过链接地址访问配置中心
+      uri: http://${config.host:127.0.0.1}:${config.port:18002}
+      enabled: true
+  #      # 通过注册中心访问配置中心
+  #      discovery:
+  #        enabled: true
+  #        serviceId: platform-base-config
+
+# ===========================================================================================
+#日志配置
+logback.job.enable: true
+logback.job.cron: 0 50 4 * * ?
+logback.oss.path: rabbitmq/base-gateway/logback
+#logging.config: https://wenewrs-oss-data.oss-cn-shanghai-internal.aliyuncs.com/config/logback.xml
+logging.level.ROOT: INFO
+logging.level.org.springframework: WARN
+logging.level.springfox: WARN
+logging.level.com.netflix: WARN
+logging.level.com.saas: INFO
+logging.level.org.springframework.cloud.sleuth: INFO
+# 打印SQL
+logging.level.com.saas.comn.mapper: INFO
+# 日志路径
+logging.file.path: /Users/admin/logs/backup
+logging.file.name: /Users/admin/logs/base-gateway/${spring.application.name}.log
+# 控制台的日志模式
+logging.pattern.console: '%d{yyyy-MM-dd HH:mm:ss} - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %msg%n'
+# 日志记录模式文件
+logging.pattern.file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] - [${spring.application.name:},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] - %-5level %logger{36} - %msg%n'

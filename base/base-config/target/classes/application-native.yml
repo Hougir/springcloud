@@ -1,0 +1,60 @@
+spring:
+#  rabbitmq:
+#    virtual-host: /var/lib/rabbitmq/XAPP_DEV
+#    host: 106.14.36.118
+#    port: 5672
+#    username: wec
+#    password: wec@2018
+#    publisherConfirmType: none
+#    publisherReturns: false
+#    template:
+#      mandatory: true
+#    listener:
+#      concurrency: 5
+#      max-concurrency: 5
+#      simple:
+#        retry:
+#          max-attempts: 3
+#          enabled: true
+#          initial-interval: 5S
+#        default-requeue-rejected: true
+
+  cloud:
+    #    inetutils:
+    #      preferredNetworks: 10.0
+    #      ignoredInterfaces: eth0
+
+#    #设置为本地方式
+#    config:
+#      server:
+#        native:
+#          # 配置文件所在目录，classpath（类路径）和（系统文件路径） file两种
+#          searchLocations: classpath:/common/
+
+    #设置为GIT方式
+#    config:
+#      server:
+#        git:
+#          # 配置gitlab仓库的地址，注意，此处必须以.git结尾
+#          uri: http://106.14.36.118:8877/config/config-file.git
+#          # gitlab仓库地址下的相对地址，可以配置多个，用,分割。
+#          search-paths: /xapp/base,/xapp/comn,/xapp/core,/xapp/gate,/xapp/loan,/xapp/mall
+#          username: config_mgr
+#          password: config_mgr
+
+    config:
+      server:
+        native:
+          # 配置文件所在目录，classpath（类路径）和（系统文件路径） file两种
+          searchLocations: classpath:/comn/,classpath:/gate/,classpath:/busi/
+
+
+#    #设置为SVN方式
+#    config:
+#      enabled: true
+#      server:
+#        svn:
+#          uri: http://106.14.61.168:82/svn/project/westore/server/westore-authentication/trunk/
+#          username: username
+#          password: password
+#          default-label: config
