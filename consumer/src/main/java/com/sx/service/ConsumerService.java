@@ -1,9 +1,12 @@
 package com.sx.service;
 
 import com.alibaba.fastjson.JSON;
+import com.sx.api.SmsAPI;
 import com.sx.commom.MQChannelSource;
 import com.sx.commom.MQCnst;
 import com.sx.commom.QueueMsg;
+import com.sx.entity.SmsMsg;
+import com.sx.entity.SmsResult;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +23,31 @@ import java.util.Map;
  */
 @Slf4j
 @Service
+@SuppressWarnings(("all"))
 public class ConsumerService extends BaseMsgConsumer<QueueMsg> {
 
     @Autowired
     private MQChannelSource mqChannelSource;
 
+    @Autowired
+    private SmsAPI smsAPI;
+
     @StreamListener(MQCnst.CUSTOMIZE_INPUT)
     public void receiveTransactionalMsg(String transactionMsg) {
         log.info("收到消息=========> {}", JSON.toJSONString(transactionMsg));
+        SmsMsg smsMsg = JSON.parseObject(transactionMsg, SmsMsg.class);
+        if (null != smsMsg) {
+            log.info("封装短信对象=========> {}", JSON.toJSONString(smsMsg));
+            this.sendSms(smsMsg);
+        }
     }
+    private Object sendSms(SmsMsg smsMsg){
+        SmsResult result = smsAPI.send(smsMsg.getAppkey(),smsMsg.getMobile(),smsMsg.getContent());
+        log.info("发送结果===> {}",JSON.toJSONString(result));
+        return result;
+    }
+
+
     @Override
     protected String getLogText() {
         return "MQ > ";

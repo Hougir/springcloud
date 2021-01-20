@@ -36,4 +36,16 @@ public class IndexController {
         User user = new User(name,age,sex);
         return mqService.login(user);
     }
+
+    @RequestMapping(value = "/send",method = RequestMethod.GET)
+    public Object login(@RequestParam("phone") String phone){
+        log.info("发送短信。号码===> {}",phone);
+        return mqService.send(phone);
+    }
+
+    @RequestMapping(value = "/async",method = RequestMethod.GET)
+    public Object async(){
+        log.info("async===>");
+        return mqService.async();
+    }
 }

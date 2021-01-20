@@ -1,12 +1,12 @@
 # 健康检查相关
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
-#  endpoint:
-#    health:
-#      show-details: ALWAYS
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 #POD名称
 pod.name: ${POD_NAME:${random.int[1,999]}}

@@ -4,6 +4,7 @@ import com.sx.commom.MQChannelSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
 
@@ -15,6 +16,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 //@EnableScheduling //开启定时任务
 @SpringBootApplication
 @EnableBinding(MQChannelSource.class)
+@EnableFeignClients(basePackages = {"com.sx.api"})
 @EnableDiscoveryClient
 public class ConsumerApplication {
     public static void main(String[] args) {
