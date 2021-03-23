@@ -1,6 +1,5 @@
 package com.sx.service;
 
-import com.alibaba.fastjson.JSON;
 import com.sx.commom.MQChannelSource;
 import com.sx.entity.SmsMsg;
 import com.sx.entity.User;
@@ -74,17 +73,19 @@ public class MQService {
                 e.printStackTrace();
             }
             log.info("t1异步执行结束: {}",Thread.currentThread().getName());
-
+            return "success";
         });
         executor.submit(()->{
             log.info("t2异步执行开始: {}",Thread.currentThread().getName());
-            int i = 0 / 1;
+            int i = 1 / 0;
             log.info("t2异步执行结束: {}",Thread.currentThread().getName());
+            return "success";
         });
 
         executor.submit(()->{
             log.info("t3异步执行开始: {}",Thread.currentThread().getName());
             log.info("t3异步执行结束: {}",Thread.currentThread().getName());
+            return "success";
         });
         return "success";
     }

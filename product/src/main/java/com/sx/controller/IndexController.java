@@ -1,13 +1,9 @@
 package com.sx.controller;
 
-import com.sx.commom.MQChannelSource;
 import com.sx.entity.User;
 import com.sx.service.MQService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
