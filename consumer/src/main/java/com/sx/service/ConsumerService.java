@@ -1,6 +1,7 @@
 package com.sx.service;
 
 import com.alibaba.fastjson.JSON;
+import com.codingapi.tx.annotation.TxTransaction;
 import com.sx.api.SmsAPI;
 import com.sx.commom.MQChannelSource;
 import com.sx.commom.MQCnst;
@@ -32,6 +33,7 @@ public class ConsumerService extends BaseMsgConsumer<QueueMsg> {
     @Autowired
     private SmsAPI smsAPI;
 
+    @TxTransaction
     @StreamListener(MQCnst.CUSTOMIZE_INPUT)
     public void receiveTransactionalMsg(String transactionMsg) {
         log.info("收到消息=========> {}", JSON.toJSONString(transactionMsg));

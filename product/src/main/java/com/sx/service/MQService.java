@@ -1,5 +1,6 @@
 package com.sx.service;
 
+import com.codingapi.tx.annotation.TxTransaction;
 import com.sx.commom.MQChannelSource;
 import com.sx.entity.SmsMsg;
 import com.sx.entity.User;
@@ -11,6 +12,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MimeTypeUtils;
 import javax.annotation.Resource;
 
@@ -49,6 +51,8 @@ public class MQService {
         return "success";
     }
 
+    @TxTransaction(isStart = true)
+    @Transactional
     public Object send(String phone) {
         log.info("发送成功:"+ phone);
         SmsMsg smsMsg = new SmsMsg();
