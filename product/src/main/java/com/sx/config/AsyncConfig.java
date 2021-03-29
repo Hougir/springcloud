@@ -22,7 +22,7 @@ public class AsyncConfig {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(5);
         taskExecutor.setMaxPoolSize(10);
-        taskExecutor.setThreadNamePrefix("MQServiceExecutor");
+        taskExecutor.setThreadNamePrefix("MQServiceExecutor-pool-%d");
         //对拒绝task的处理策略
         taskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         taskExecutor.setKeepAliveSeconds(60);

@@ -110,7 +110,7 @@
             <artifactId>jol-core</artifactId>
             <version>0.9</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.codingapi</groupId>
             <artifactId>transaction-springcloud</artifactId>
             <version>${lcn.last.version}</version>
@@ -120,7 +120,7 @@
             <groupId>com.codingapi</groupId>
             <artifactId>tx-plugins-db</artifactId>
             <version>${lcn.last.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>

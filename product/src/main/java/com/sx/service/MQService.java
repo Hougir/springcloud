@@ -1,6 +1,6 @@
 package com.sx.service;
 
-import com.codingapi.tx.annotation.TxTransaction;
+//import com.codingapi.tx.annotation.TxTransaction;
 import com.sx.commom.MQChannelSource;
 import com.sx.entity.SmsMsg;
 import com.sx.entity.User;
@@ -51,7 +51,7 @@ public class MQService {
         return "success";
     }
 
-    @TxTransaction(isStart = true)
+    //@TxTransaction(isStart = true)
     @Transactional
     public Object send(String phone) {
         log.info("发送成功:"+ phone);
@@ -71,11 +71,8 @@ public class MQService {
     public Object async() {
         executor.submit(()->{
             log.info("t1异步执行开始: {}",Thread.currentThread().getName());
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            wait();
+            notify();
             log.info("t1异步执行结束: {}",Thread.currentThread().getName());
             return "success";
         });
@@ -87,33 +84,11 @@ public class MQService {
         });
 
         executor.submit(()->{
-            log.info("t3异步执行开始: {}",Thread.currentThread().getName());
+            log.info("t3=> {}:异步执行开始",Thread.currentThread().getName());
+            wait();
             log.info("t3异步执行结束: {}",Thread.currentThread().getName());
             return "success";
         });
         return "success";
-    }
-
-    void t1(){
-        for (int i = 0; i < 10; i++) {
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            log.info("t1异步执行开始: {}",Thread.currentThread().getName());
-//            executor.submit(() ->{
-//                log.info("t1异步执行开始: {}",Thread.currentThread().getName());
-//            });
-        }
-    }
-
-    void t2(){
-        for (int i = 0; i < 10; i++) {
-            log.info("t2异步执行开始: {}",Thread.currentThread().getName());
-//            executor.submit(() ->{
-//                log.info("t2异步执行开始: {}",Thread.currentThread().getName());
-//            });
-        }
     }
 }

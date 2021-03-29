@@ -1,5 +1,6 @@
 package com.sx.component;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -121,6 +122,9 @@ public class AsyncComponent {
          */
         //对拒绝task的处理策略
         taskScheduler.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+
+        ThreadFactoryBuilder threadFactoryBuilder = new ThreadFactoryBuilder();
+        taskScheduler.setThreadFactory(threadFactoryBuilder.setNameFormat("测试-pool-%d").build());
         taskScheduler.initialize();
         return taskScheduler;
     }
