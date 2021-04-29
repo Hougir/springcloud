@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
@@ -45,11 +44,7 @@ public class Lambda01 {
     public void t2(){
         Integer[] is = {1,2,3,4,5};
         List<Integer> integers = Arrays.asList(is);
-        List<Integer> l = integers.stream().map(i -> i * i).collect(Collectors.toList());
-        for (int i = 0; i < l.size(); i++) {
-            is[i] = l.get(i);
-        }
-        //Arrays.stream(is).forEach(System.out::println);
+        integers.stream().map(x -> x*x).collect(Collectors.toList()).forEach(System.out::print);
     }
     /*
 	 2.	怎样用 map 和 reduce 方法数一数流中有多少个Employee呢？
@@ -129,7 +124,7 @@ public class Lambda01 {
     @Test
     public void t8(){
         boolean cambridge = transactions.stream().anyMatch(s -> s.getTrader().getCity().equalsIgnoreCase("Milan"));
-        log.info("有没有交易员是在米兰工作的? 答案:{}",cambridge ? "有!" : "没有!");
+        log.info("有没有交易员是在米兰工作的?:{}",cambridge ? "有!" : "没有!");
     }
     //6. 打印生活在剑桥的交易员的所有交易额
     @Test
@@ -180,7 +175,9 @@ public class Lambda01 {
     //Supplier<T> 供给型接口 :
     @Test
     public void test2(){
-        getNumList(20, () -> (int)(Math.random() * 100)).stream().map(s -> s + ",").forEach(System.out::print);
+        getNumList(20, () -> (int)(Math.random() * 100)).stream().map(s -> {
+            return s + ",";
+        }).forEach(System.out::print);
     }
 
     //需求：产生指定个数的整数，并放入集合中
@@ -201,13 +198,5 @@ public class Lambda01 {
 
     public void happy(double money, Consumer<Double> con){
         con.accept(money);
-    }
-
-    @Test
-    public void test11(){
-        BigDecimal a = new BigDecimal(3);
-        BigDecimal b = new BigDecimal(2);
-        int i = a.compareTo(b);
-        log.info("i={}",i);
     }
 }
