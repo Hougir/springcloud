@@ -55,7 +55,7 @@ eureka:
 #################################  rabbitmq 配置  ##############################################################
 spring.rabbitmq:
   virtual-host: /
-  host: 192.168.40.88
+  host: 47.103.155.11
   port: 5672
   username: guest
   password: guest
