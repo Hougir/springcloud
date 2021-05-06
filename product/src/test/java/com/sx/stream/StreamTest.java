@@ -74,7 +74,7 @@ public class StreamTest {
 
     }
     class Actor{
-        private String name;
+        private volatile String name;
 
         public Actor() {
         }
@@ -104,7 +104,7 @@ public class StreamTest {
      */
     @Test
     public void t4(){
-        String[] words = new String[]{"Hello","World"};
+        String[]  words = new String[]{"Hello","World"};
         // 输出 [Ljava.lang.String;@77caeb3e
         //[Ljava.lang.String;@1e88b3c
         //Arrays.stream(words).map(s -> s.split("")).distinct().collect(Collectors.toList()).forEach(System.out::println);

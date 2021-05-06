@@ -27,6 +27,4 @@ public interface SingleActivityOrderGoodsMapper {
     int updateByPrimaryKeySelective(SingleActivityOrderGoods record);
 
     int updateByPrimaryKey(SingleActivityOrderGoods record);
-
-    List<SingleActivityOrderGoods> queryList(@Param("goods_refund_number") Byte goodsRefundNumber);
 }

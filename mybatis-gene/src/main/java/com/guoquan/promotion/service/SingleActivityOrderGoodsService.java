@@ -10,5 +10,5 @@ import java.util.List;
  * @date 2021/4/29 20:09
  */
 public interface SingleActivityOrderGoodsService {
-    List<SingleActivityOrderGoods> getList(Byte s);
+
 }
