@@ -31,19 +31,19 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置 -->
-        <javaModelGenerator targetPackage="com.guoquan.promotion.dao.entity.single"
+        <javaModelGenerator targetPackage="com.guoquan.activity.dao.entity.venue"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置 -->
-        <sqlMapGenerator targetPackage="mapper/newuser"
+        <sqlMapGenerator targetPackage="mapper/venue"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.guoquan.promotion.dao.repository.single"
+                             targetPackage="com.guoquan.activity.dao.entity.venue"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -71,7 +71,7 @@
 <!--               enableDeleteByExample="true" enableSelectByExample="true"-->
 <!--               enableUpdateByExample="true"/>-->
 
-        <table tableName="single_activity_order_goods" enableCountByExample="true"
+        <table tableName="venue_coupon_component" enableCountByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true"
                selectByExampleQueryId="true"/>

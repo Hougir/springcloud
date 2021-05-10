@@ -1,13 +1,7 @@
 package com.guoquan.promotion.service;
 
-import com.guoquan.promotion.dao.entity.single.SingleActivityOrderGoods;
-import com.guoquan.promotion.dao.entity.single.SingleActivityOrderGoodsExample;
-import com.guoquan.promotion.dao.repository.single.SingleActivityOrderGoodsMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author huang hao

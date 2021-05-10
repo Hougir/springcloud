@@ -31,6 +31,8 @@ public class MQService {
     @Qualifier("MQServiceExecutor")
     private ThreadPoolTaskExecutor executor;
 
+
+
     public Object productMsg(String msg){
         log.info("发送成功:"+msg);
         boolean send = mqChannelSource.tianRuiYunOutput().send(
@@ -90,5 +92,9 @@ public class MQService {
             return "success";
         });
         return "success";
+    }
+
+    public Object autowiredMaps() {
+        return null;
     }
 }

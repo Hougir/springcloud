@@ -1,9 +1,5 @@
 package com.guoquan.promotion.service;
 
-import com.guoquan.promotion.dao.entity.single.SingleActivityOrderGoods;
-
-import java.util.List;
-
 /**
  * @author huang hao
  * @version 1.0

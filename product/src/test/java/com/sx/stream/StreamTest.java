@@ -2,12 +2,15 @@ package com.sx.stream;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Copy;
+import org.openjdk.jol.info.ClassLayout;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -49,9 +52,9 @@ public class StreamTest {
      */
     @Test
     public void t3(){
-
+        long start = System.nanoTime();
         //集合存储元素
-        ArrayList<String> manArray = new ArrayList<>();
+        List<String> manArray = new CopyOnWriteArrayList<>();
         manArray.add("刘德华");
         manArray.add("成龙");
         manArray.add("吴彦祖");
@@ -59,7 +62,42 @@ public class StreamTest {
         manArray.add("周星驰");
         manArray.add("吴京");
 
-        ArrayList<String> womanList = new ArrayList<>();
+        List<String> womanList = new CopyOnWriteArrayList<>();
+        womanList.add("林心如");
+        womanList.add("孙俪");
+        womanList.add("柳岩");
+        womanList.add("林青霞");
+        womanList.add("林咩咩");
+        womanList.add("张曼玉");
+
+        List<String> ms = manArray.parallelStream().filter(a -> a.length() == 3).limit(3).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
+        List<String> ws = womanList.parallelStream().filter(w -> w.startsWith("林")).skip(1).collect(Collectors.toCollection(CopyOnWriteArrayList::new));
+        ms.addAll(ws);
+        ms.parallelStream().map(Actor::new).forEachOrdered(System.out::println);
+        long end = System.nanoTime();
+        log.info("耗时:{}",(end - start) / 1000000); // 60毫秒
+        /**
+         * Actor{name='刘德华'}
+         * Actor{name='吴彦祖'}
+         * Actor{name='周润发'}
+         * Actor{name='林青霞'}
+         * Actor{name='林咩咩'}
+         */
+
+    }
+    @Test
+    public void t6(){
+        long start = System.nanoTime();
+        //集合存储元素
+        List<String> manArray = new ArrayList<>();
+        manArray.add("刘德华");
+        manArray.add("成龙");
+        manArray.add("吴彦祖");
+        manArray.add("周润发");
+        manArray.add("周星驰");
+        manArray.add("吴京");
+
+        List<String> womanList = new ArrayList<>();
         womanList.add("林心如");
         womanList.add("孙俪");
         womanList.add("柳岩");
@@ -71,6 +109,15 @@ public class StreamTest {
         List<String> ws = womanList.stream().filter(w -> w.startsWith("林")).skip(1).collect(Collectors.toList());
         ms.addAll(ws);
         ms.stream().map(Actor::new).forEach(System.out::println);
+        long end = System.nanoTime();
+        log.info("耗时:{}",(end - start) / 1000000); // 60毫秒
+        /**
+         * Actor{name='刘德华'}
+         * Actor{name='吴彦祖'}
+         * Actor{name='周润发'}
+         * Actor{name='林青霞'}
+         * Actor{name='林咩咩'}
+         */
 
     }
     class Actor{
@@ -110,5 +157,11 @@ public class StreamTest {
         //Arrays.stream(words).map(s -> s.split("")).distinct().collect(Collectors.toList()).forEach(System.out::println);
         //输出  HeloWrd
         Arrays.stream(words).map(s->s.split("")).flatMap(Arrays::stream).distinct().forEach(System.out::print);
+    }
+
+    @Test
+    public void t5(){
+        Object[] objects = new Object[9];
+        System.out.println(ClassLayout.parseInstance(objects).toPrintable());
     }
 }

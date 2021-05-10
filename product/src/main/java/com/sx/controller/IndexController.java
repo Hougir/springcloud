@@ -2,6 +2,8 @@ package com.sx.controller;
 
 import com.sx.entity.User;
 import com.sx.service.MQService;
+import com.sx.service.TestAutowiredMaps;
+import com.sx.service.TestAutowiredMapsHandel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,9 @@ public class IndexController {
 
     @Autowired
     private MQService mqService;
+
+    @Autowired
+    TestAutowiredMapsHandel testAutowiredMapsHandel;
 
 
     @RequestMapping(value = "/proMsg",method = RequestMethod.GET)
@@ -43,5 +48,15 @@ public class IndexController {
     public Object async(){
         log.info("async===>");
         return mqService.async();
+    }
+
+    /**
+     * 测试@Autowired注入到集合  map
+     * @return
+     */
+    @RequestMapping(value = "/test/autowired/maps",method = RequestMethod.GET)
+    public Object maps(){
+        log.info("【/test/autowired/maps】");
+        return testAutowiredMapsHandel.invoke();
     }
 }
