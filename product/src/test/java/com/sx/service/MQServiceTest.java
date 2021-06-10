@@ -1,5 +1,6 @@
 package com.sx.service;
 
+import com.sx.ProductApplication;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version 1.0
  * @date 2021/3/18 13:59
  */
-// 获取启动类，加载配置，确定装载 Spring 程序的装载方法，它回去寻找 主配置启动类（被 @SpringBootApplication 注解的）
-@SpringBootTest
+
 // 让 JUnit 运行 Spring 的测试环境， 获得 Spring 环境的上下文的支持
 @RunWith(SpringRunner.class)
+// 获取启动类，加载配置，确定装载 Spring 程序的装载方法，它回去寻找 主配置启动类（被 @SpringBootApplication 注解的）
+@SpringBootTest(classes = {ProductApplication.class})
 class MQServiceTest {
     @Autowired
     MQService mqService;

@@ -1,6 +1,7 @@
 package com.sx.stream;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Test;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Copy;
 import org.openjdk.jol.info.ClassLayout;
@@ -163,5 +164,15 @@ public class StreamTest {
     public void t5(){
         Object[] objects = new Object[9];
         System.out.println(ClassLayout.parseInstance(objects).toPrintable());
+    }
+    @Test
+    public void t9(){
+        StopWatch sw = StopWatch.createStarted();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(sw.getTime());
     }
 }

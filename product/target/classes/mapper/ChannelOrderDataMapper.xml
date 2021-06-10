@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sx.mapper.ChannelOrderDataMapper" >
+  <resultMap id="BaseResultMap" type="com.sx.model.ChannelOrderData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="data_date" property="dataDate" jdbcType="DATE" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="paid" property="paid" jdbcType="INTEGER" />
+    <result column="be_paid" property="bePaid" jdbcType="INTEGER" />
+    <result column="delivered" property="delivered" jdbcType="INTEGER" />
+    <result column="be_delivered" property="beDelivered" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="refund_num" property="refundNum" jdbcType="INTEGER" />
+    <result column="refund_amount" property="refundAmount" jdbcType="DOUBLE" />
+    <result column="visitors" property="visitors" jdbcType="INTEGER" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_update" property="gmtUpdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, channel_id, data_date, order_num, paid, be_paid, delivered, be_delivered, amount, 
+    refund_num, refund_amount, visitors, gmt_create, gmt_update
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_order_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_order_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sx.model.ChannelOrderData" >
+    insert into channel_order_data (id, channel_id, data_date, 
+      order_num, paid, be_paid, 
+      delivered, be_delivered, amount, 
+      refund_num, refund_amount, visitors, 
+      gmt_create, gmt_update)
+    values (#{id,jdbcType=BIGINT}, #{channelId,jdbcType=BIGINT}, #{dataDate,jdbcType=DATE}, 
+      #{orderNum,jdbcType=INTEGER}, #{paid,jdbcType=INTEGER}, #{bePaid,jdbcType=INTEGER}, 
+      #{delivered,jdbcType=INTEGER}, #{beDelivered,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, 
+      #{refundNum,jdbcType=INTEGER}, #{refundAmount,jdbcType=DOUBLE}, #{visitors,jdbcType=INTEGER}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sx.model.ChannelOrderData" >
+    insert into channel_order_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="dataDate != null" >
+        data_date,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="paid != null" >
+        paid,
+      </if>
+      <if test="bePaid != null" >
+        be_paid,
+      </if>
+      <if test="delivered != null" >
+        delivered,
+      </if>
+      <if test="beDelivered != null" >
+        be_delivered,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="refundNum != null" >
+        refund_num,
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount,
+      </if>
+      <if test="visitors != null" >
+        visitors,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="dataDate != null" >
+        #{dataDate,jdbcType=DATE},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="paid != null" >
+        #{paid,jdbcType=INTEGER},
+      </if>
+      <if test="bePaid != null" >
+        #{bePaid,jdbcType=INTEGER},
+      </if>
+      <if test="delivered != null" >
+        #{delivered,jdbcType=INTEGER},
+      </if>
+      <if test="beDelivered != null" >
+        #{beDelivered,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="refundNum != null" >
+        #{refundNum,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null" >
+        #{refundAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="visitors != null" >
+        #{visitors,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null" >
+        #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sx.model.ChannelOrderData" >
+    update channel_order_data
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="dataDate != null" >
+        data_date = #{dataDate,jdbcType=DATE},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="paid != null" >
+        paid = #{paid,jdbcType=INTEGER},
+      </if>
+      <if test="bePaid != null" >
+        be_paid = #{bePaid,jdbcType=INTEGER},
+      </if>
+      <if test="delivered != null" >
+        delivered = #{delivered,jdbcType=INTEGER},
+      </if>
+      <if test="beDelivered != null" >
+        be_delivered = #{beDelivered,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="refundNum != null" >
+        refund_num = #{refundNum,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null" >
+        refund_amount = #{refundAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="visitors != null" >
+        visitors = #{visitors,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null" >
+        gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sx.model.ChannelOrderData" >
+    update channel_order_data
+    set channel_id = #{channelId,jdbcType=BIGINT},
+      data_date = #{dataDate,jdbcType=DATE},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      paid = #{paid,jdbcType=INTEGER},
+      be_paid = #{bePaid,jdbcType=INTEGER},
+      delivered = #{delivered,jdbcType=INTEGER},
+      be_delivered = #{beDelivered,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      refund_num = #{refundNum,jdbcType=INTEGER},
+      refund_amount = #{refundAmount,jdbcType=DOUBLE},
+      visitors = #{visitors,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -22,8 +22,11 @@ public class TestAutowiredMapsHandel {
     /*@Autowired
     List<TestAutowiredMaps> maps;*/
     public Object invoke(){
-        maps.entrySet().stream().forEach(m->m.getValue().doSome());
+        //maps.entrySet().stream().forEach(m->m.getValue().doSome());
         //maps.stream().forEach(TestAutowiredMaps::doSome);
+        for (TestAutowiredMaps t : maps.values()) {
+            t.doSome();
+        }
         return "success";
     }
 }

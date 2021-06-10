@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sx.mapper.ChannelOrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sx.model.ChannelOrderInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="channel_id" property="channelId" jdbcType="BIGINT" />
+    <result column="data_date" property="dataDate" jdbcType="DATE" />
+    <result column="total_amount" property="totalAmount" jdbcType="BIGINT" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="logistics_time" property="logisticsTime" jdbcType="VARCHAR" />
+    <result column="receipt_time" property="receiptTime" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="b_ype" property="bYpe" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="logistics_code" property="logisticsCode" jdbcType="VARCHAR" />
+    <result column="logistics_id" property="logisticsId" jdbcType="BIGINT" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="createTime" property="createtime" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, channel_id, data_date, total_amount, order_status, logistics_time, receipt_time, 
+    order_id, b_ype, code, logistics_code, logistics_id, order_type, pay_type, product_id, 
+    product_name, shop_id, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_order_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from channel_order_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sx.model.ChannelOrderInfo" >
+    insert into channel_order_info (id, channel_id, data_date, 
+      total_amount, order_status, logistics_time, 
+      receipt_time, order_id, b_ype, 
+      code, logistics_code, logistics_id, 
+      order_type, pay_type, product_id, 
+      product_name, shop_id, createTime, 
+      updateTime)
+    values (#{id,jdbcType=BIGINT}, #{channelId,jdbcType=BIGINT}, #{dataDate,jdbcType=DATE}, 
+      #{totalAmount,jdbcType=BIGINT}, #{orderStatus,jdbcType=INTEGER}, #{logisticsTime,jdbcType=VARCHAR}, 
+      #{receiptTime,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{bYpe,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{logisticsCode,jdbcType=VARCHAR}, #{logisticsId,jdbcType=BIGINT}, 
+      #{orderType,jdbcType=INTEGER}, #{payType,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, #{createtime,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sx.model.ChannelOrderInfo" >
+    insert into channel_order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="dataDate != null" >
+        data_date,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="logisticsTime != null" >
+        logistics_time,
+      </if>
+      <if test="receiptTime != null" >
+        receipt_time,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="bYpe != null" >
+        b_ype,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="logisticsCode != null" >
+        logistics_code,
+      </if>
+      <if test="logisticsId != null" >
+        logistics_id,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="dataDate != null" >
+        #{dataDate,jdbcType=DATE},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsTime != null" >
+        #{logisticsTime,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTime != null" >
+        #{receiptTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="bYpe != null" >
+        #{bYpe,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsCode != null" >
+        #{logisticsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsId != null" >
+        #{logisticsId,jdbcType=BIGINT},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sx.model.ChannelOrderInfo" >
+    update channel_order_info
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=BIGINT},
+      </if>
+      <if test="dataDate != null" >
+        data_date = #{dataDate,jdbcType=DATE},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsTime != null" >
+        logistics_time = #{logisticsTime,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTime != null" >
+        receipt_time = #{receiptTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="bYpe != null" >
+        b_ype = #{bYpe,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsCode != null" >
+        logistics_code = #{logisticsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsId != null" >
+        logistics_id = #{logisticsId,jdbcType=BIGINT},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sx.model.ChannelOrderInfo" >
+    update channel_order_info
+    set channel_id = #{channelId,jdbcType=BIGINT},
+      data_date = #{dataDate,jdbcType=DATE},
+      total_amount = #{totalAmount,jdbcType=BIGINT},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      logistics_time = #{logisticsTime,jdbcType=VARCHAR},
+      receipt_time = #{receiptTime,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      b_ype = #{bYpe,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      logistics_code = #{logisticsCode,jdbcType=VARCHAR},
+      logistics_id = #{logisticsId,jdbcType=BIGINT},
+      order_type = #{orderType,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      createTime = #{createtime,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
