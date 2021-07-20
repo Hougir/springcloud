@@ -19,4 +19,5 @@ public class HelloWord{
 		System.out.println("a=" + a.hashCode());
 		System.out.println("b=" + b.hashCode());
 	}
+
 }

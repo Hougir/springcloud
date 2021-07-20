@@ -15,6 +15,7 @@
         <module>consumer</module>
         <module>base</module>
         <module>mybatis-gene</module>
+        <module>seata</module>
     </modules>
 
     <properties>

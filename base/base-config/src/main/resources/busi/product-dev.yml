@@ -9,3 +9,13 @@ spring.cloud.stream.bindings:
     destination: CUSTOMIZE_TOPIC
     content-type: application/json
     group: CUSTOMIZE_TOPIC
+
+
+  data:
+    mongodb:
+      authentication-database: hamsv4_developer
+      database: hamsv4_developer
+      host: 127.0.0.1
+      password:
+      port: 27017
+      username:

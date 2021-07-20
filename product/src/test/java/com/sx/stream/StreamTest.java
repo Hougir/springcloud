@@ -1,16 +1,12 @@
 package com.sx.stream;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Test;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Copy;
 import org.openjdk.jol.info.ClassLayout;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
@@ -25,8 +21,8 @@ public class StreamTest {
      * 有如下7个元素黄药师，冯蘅，郭靖，黄蓉，郭芙，郭襄，郭破虏，使用Stream将以郭字开头的元素存入新数组
      */
     @Test
-    public void t1(){
-        String[] strs = {"黄药师","冯蘅","郭靖","黄蓉","郭芙","郭襄","郭破虏"};
+    public void t1() {
+        String[] strs = {"黄药师", "冯蘅", "郭靖", "黄蓉", "郭芙", "郭襄", "郭破虏"};
         Arrays.stream(strs).filter(s -> s.startsWith("郭")).collect(Collectors.toList()).forEach(System.out::println);
     }
 
@@ -36,9 +32,14 @@ public class StreamTest {
      * 2、取出后2个元素并在控制台打印输出。
      */
     @Test
-    public void t2(){
+    public void t2() {
         ArrayList<String> strings = new ArrayList<>();
-        strings.add("陈玄风");strings.add("梅超风");strings.add("曲灵风");strings.add("武眠风");strings.add("冯默风");strings.add("罗玉风");
+        strings.add("陈玄风");
+        strings.add("梅超风");
+        strings.add("曲灵风");
+        strings.add("武眠风");
+        strings.add("冯默风");
+        strings.add("罗玉风");
         //1
         strings.stream().limit(2).forEach(System.out::println);
         //2
@@ -52,7 +53,7 @@ public class StreamTest {
      * 把上一步操作后的元素作为构造方法的参数创建演员对象（实例化一个Actor类，此处尝试使用map），遍历数组
      */
     @Test
-    public void t3(){
+    public void t3() {
         long start = System.nanoTime();
         //集合存储元素
         List<String> manArray = new CopyOnWriteArrayList<>();
@@ -76,7 +77,7 @@ public class StreamTest {
         ms.addAll(ws);
         ms.parallelStream().map(Actor::new).forEachOrdered(System.out::println);
         long end = System.nanoTime();
-        log.info("耗时:{}",(end - start) / 1000000); // 60毫秒
+        log.info("耗时:{}", (end - start) / 1000000); // 60毫秒
         /**
          * Actor{name='刘德华'}
          * Actor{name='吴彦祖'}
@@ -86,8 +87,9 @@ public class StreamTest {
          */
 
     }
+
     @Test
-    public void t6(){
+    public void t6() {
         long start = System.nanoTime();
         //集合存储元素
         List<String> manArray = new ArrayList<>();
@@ -111,7 +113,7 @@ public class StreamTest {
         ms.addAll(ws);
         ms.stream().map(Actor::new).forEach(System.out::println);
         long end = System.nanoTime();
-        log.info("耗时:{}",(end - start) / 1000000); // 60毫秒
+        log.info("耗时:{}", (end - start) / 1000000); // 60毫秒
         /**
          * Actor{name='刘德华'}
          * Actor{name='吴彦祖'}
@@ -121,7 +123,8 @@ public class StreamTest {
          */
 
     }
-    class Actor{
+
+    class Actor {
         private volatile String name;
 
         public Actor() {
@@ -151,28 +154,75 @@ public class StreamTest {
      * 对给定单词列表 ["Hello","World"],你想返回列表["H","e","l","o","W","r","d"]
      */
     @Test
-    public void t4(){
-        String[]  words = new String[]{"Hello","World"};
+    public void t4() {
+        String[] words = new String[]{"Hello", "World"};
         // 输出 [Ljava.lang.String;@77caeb3e
         //[Ljava.lang.String;@1e88b3c
         //Arrays.stream(words).map(s -> s.split("")).distinct().collect(Collectors.toList()).forEach(System.out::println);
         //输出  HeloWrd
-        Arrays.stream(words).map(s->s.split("")).flatMap(Arrays::stream).distinct().forEach(System.out::print);
+        Arrays.stream(words).map(s -> s.split("")).flatMap(Arrays::stream).distinct().forEach(System.out::print);
     }
 
     @Test
-    public void t5(){
+    public void t5() {
         Object[] objects = new Object[9];
         System.out.println(ClassLayout.parseInstance(objects).toPrintable());
     }
+//    @Test
+//    public void t9(){
+//        StopWatch sw = StopWatch.createStarted();
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(sw.getTime());
+//    }
+
+
     @Test
-    public void t9(){
-        StopWatch sw = StopWatch.createStarted();
+    public void t99() {
+        String str = "2021-06-17";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date createTime = null;
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
+            createTime = df.parse(str);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println(sw.getTime());
+
+        Calendar eighteenPM1 = Calendar.getInstance();
+        eighteenPM1.setTime(createTime);
+
+        Calendar eighteenPM = Calendar.getInstance();
+        eighteenPM.set(Calendar.YEAR, eighteenPM1.get(Calendar.YEAR));
+        eighteenPM.set(Calendar.MONTH, eighteenPM1.get(Calendar.MONTH));
+        eighteenPM.set(Calendar.DAY_OF_MONTH, eighteenPM1.get(Calendar.DAY_OF_MONTH));
+        eighteenPM.set(Calendar.HOUR_OF_DAY, 00);
+        eighteenPM.set(Calendar.MINUTE, 00);
+        eighteenPM.set(Calendar.SECOND, 00);
+        Date twentyOClock = eighteenPM.getTime();
+        System.out.println(createTime);
+        System.out.println(twentyOClock);
+        System.out.println(createTime.compareTo(twentyOClock));
+    }
+
+    @Test
+    public void t55() {
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT+08:00"));    //获取东八区时间
+        //获取年
+        int year = c.get(Calendar.YEAR);
+        //获取月份，0表示1月份
+        int month = c.get(Calendar.MONTH) + 1;
+        //获取当前天数
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        System.out.println(year);
+        System.out.println(month);
+        System.out.println(day);
+
+        //获取昨日
+        c.add(Calendar.DAY_OF_MONTH, -1);
+        int yesterday = c.get(Calendar.DAY_OF_MONTH);
+        System.out.println(yesterday);
     }
 }
